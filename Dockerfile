@@ -40,3 +40,5 @@ ENV SHELL /bin/bash
 
 # Install upload-apk helper
 RUN npm install -g xcode-build-tools
+
+RUN useradd -ms /bin/bash sos
