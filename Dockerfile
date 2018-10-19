@@ -9,6 +9,9 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && apt-get install -y nodejs expect $ANDROID_EMULATOR_DEPS \
     && apt-get autoclean
 
+ENV ANDROID_HOME /opt/android-sdk-linux
+RUN mkdir -p $ANDROID_HOME
+
 # Install the SDK
 ENV ANDROID_SDK_URL https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
 RUN cd /opt \
@@ -17,7 +20,6 @@ RUN cd /opt \
     && rm -f android-sdk.zip \
     && chown -R root:root android-sdk-linux
 
-ENV ANDROID_HOME /opt/android-sdk-linux
 ENV PATH ${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${PATH}
 
 # Install custom tools
@@ -38,8 +40,11 @@ ENV PATH ${ANDROID_HOME}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}:${PATH}
 # Fix for emulator detect 64bit
 ENV SHELL /bin/bash
 
+VOLUME /root/.gradle
+
 # Install upload-apk helper
 RUN npm install -g xcode-build-tools
 
 RUN useradd -ms /bin/bash zhenyu
 RUN useradd -ms /bin/bash sos
+
