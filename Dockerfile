@@ -27,8 +27,8 @@ COPY tools /opt/tools
 ENV PATH /opt/tools:${PATH}
 
 # Install Android platform and things
-ENV ANDROID_PLATFORM_VERSION 26
-ENV ANDROID_BUILD_TOOLS_VERSION 26.0.3
+ENV ANDROID_PLATFORM_VERSION 27
+ENV ANDROID_BUILD_TOOLS_VERSION 27.0.3
 ENV ANDROID_EXTRA_PACKAGES "build-tools;26.0.0" "build-tools;26.0.1" "build-tools;26.0.2"
 ENV ANDROID_REPOSITORIES "extras;android;m2repository" "extras;google;m2repository"
 ENV ANDROID_CONSTRAINT_PACKAGES "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1" "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.0"
@@ -45,6 +45,5 @@ VOLUME /root/.gradle
 # Install upload-apk helper
 RUN npm install -g xcode-build-tools
 
-RUN useradd -ms /bin/bash zhenyu
-RUN useradd -ms /bin/bash sos
+RUN useradd -u 1001 sos
 
